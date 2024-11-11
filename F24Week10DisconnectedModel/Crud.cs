@@ -43,6 +43,7 @@ namespace F24Week10DisconnectedModel
 
         public DataTable GetAllProducts()
         {
+            FillDataSet();
             return tbl;
         }
 
@@ -50,6 +51,18 @@ namespace F24Week10DisconnectedModel
         {
             var row = tbl.Rows.Find(id);
             return row;
+        }
+
+        public void InsertProduct(string name, decimal price, short quantity)
+        {
+            var newRow = tbl.NewRow();
+            newRow["ProductName"] = name;
+            newRow["UnitPrice"] = price;
+            newRow["UnitsInStock"] = quantity;
+            tbl.Rows.Add(newRow);
+
+            adp.InsertCommand = cmdBuilder.GetInsertCommand();
+            adp.Update(tbl);
         }
     }
 }

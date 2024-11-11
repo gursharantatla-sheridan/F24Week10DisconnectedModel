@@ -53,5 +53,16 @@ namespace F24Week10DisconnectedModel
                 MessageBox.Show("Invalid ID. Please try again.");
             }
         }
+
+        private void btnInsert_Click(object sender, RoutedEventArgs e)
+        {
+            string name = txtName.Text;
+            decimal price = decimal.Parse(txtPrice.Text);
+            short quantity = short.Parse(txtQuantity.Text);
+
+            crud.InsertProduct(name, price, quantity);
+            grdProducts.ItemsSource = crud.GetAllProducts().DefaultView;
+            MessageBox.Show("New product added");
+        }
     }
 }
